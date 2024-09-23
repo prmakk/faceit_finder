@@ -1,10 +1,15 @@
+import HomePage from "./pages/home/HomePage";
+import Header from "./components/header/Header";
+
+import "./styles/global.scss";
 import "./styles/normalize.css";
 
 function App() {
     return (
-        <>
-            <h1>chore: init</h1>
-        </>
+        <main className="container">
+            <Header />
+            <HomePage />
+        </main>
     );
 }
 

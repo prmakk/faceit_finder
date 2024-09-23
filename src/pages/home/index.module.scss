@@ -1,0 +1,52 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.home {
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+        @include textGradient();
+        padding-top: 200px;
+        text-align: center;
+        font-size: clamp(42px, 4vw, 46px);
+        font-weight: 700;
+    }
+
+    .subtitle {
+        margin-top: 10px;
+        text-align: center;
+        font-size: clamp(14px, 2vw, 18px);
+    }
+
+    .search {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .input {
+            background: transparent
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+                no-repeat 13px center;
+            padding: 10px 10px 10px 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+            max-width: 600px;
+            width: 90%;
+            border: none;
+            background-color: $secondaryPurple;
+            transition: background-color 0.3s ease-in, border 0.3s ease-in,
+                box-shadow 0.3s ease-in;
+            outline: none;
+            font-size: 16px;
+
+            &:focus,
+            &:hover {
+                background-color: #fff;
+                box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+}

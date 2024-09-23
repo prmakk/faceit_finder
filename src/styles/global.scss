@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+    font-family: "PT Sans", sans-serif;
+}
+
+.container {
+    max-width: 1700px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+@media (max-width: 1600px) {
+    .container {
+        padding: 0px 10px;
+    }
+}

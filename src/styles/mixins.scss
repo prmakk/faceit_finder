@@ -1,0 +1,10 @@
+@mixin textGradient {
+    background: radial-gradient(
+        circle farthest-corner at top left,
+        #838fd2 0%,
+        #db5adf 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
