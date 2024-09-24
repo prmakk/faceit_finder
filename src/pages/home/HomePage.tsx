@@ -1,7 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import styles from "./index.module.scss";
+import { userStore } from "../../store/store";
 
 const HomePage: FC = () => {
+    const state = userStore();
+
+    useEffect(() => {
+        state.fetchUserDataBySteamId("76561198299236101");
+    }, []);
+
+    console.log(state.userData);
+
     return (
         <div className={styles.home}>
             <h1 className={styles.title}>FaceitFinder</h1>
