@@ -2,27 +2,65 @@ import axios from "axios";
 import { create } from "zustand";
 
 interface IStore {
-    userData: [],
-    loading: boolean,
-    error: string,
-    fetchUserDataBySteamId: (id: string) => Promise<void>,
+    userMainInfo: any;
+    userGameInfo: any;
+    userSteamId: number;
+    userFaceitId: string;
+    loading: boolean;
+    error: string;
+    fetchUserDataBySteamId: (id: string) => Promise<void>;
 }
 
-export const userStore = create<IStore>(set => ({
-    userData: [],
+export const userStore = create<IStore>((set) => ({
+    userMainInfo: [],
+    userGameInfo: [],
     loading: false,
-    error: '',
-    fetchUserDataBySteamId: async(id) => {
-        set({loading: true});
+    userSteamId: 0,
+    userFaceitId: "",
+    error: "",
+    fetchUserDataBySteamId: async (id) => {
+        set({ userMainInfo: [], loading: true, error: "" });
         try {
-            const response = await axios.get(`https://open.faceit.com/data/v4/players?game=csgo&game_player_id=${id}`, {
-                headers: {
-                    Authorization: `Bearer ${import.meta.env.VITE_FACEIT_API_TOKEN}`
+            const response = await axios.get(
+                `https://playerdb.co/api/player/steam/${id}`
+            );
+
+            const { steam64id } = response.data.data.player.meta;
+
+            console.log("Steam64 ID:", steam64id);
+
+            const userMainInfo = await axios.get(
+                `https://open.faceit.com/data/v4/players?game=csgo&game_player_id=${steam64id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${
+                            import.meta.env.VITE_FACEIT_API_TOKEN
+                        }`,
+                    },
                 }
-            })
-            set({userData: response.data, loading: false});
+            );
+
+            const userGameInfo = await axios.get(
+                `https://open.faceit.com/data/v4/players/${userMainInfo.data.player_id}/stats/csgo`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${
+                            import.meta.env.VITE_FACEIT_API_TOKEN
+                        }`,
+                    },
+                }
+            );
+
+            set({
+                userMainInfo: userMainInfo.data,
+                userGameInfo: userGameInfo.data,
+                loading: false,
+                userSteamId: steam64id,
+                userFaceitId: String(userMainInfo.data.player_id),
+            });
         } catch (error) {
-            set({error: String(error)})
+            console.error("Request error:", error);
+            set({ error: String(error), loading: false });
         }
     },
-}))
+}));

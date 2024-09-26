@@ -1,15 +1,20 @@
-import { FC, useEffect } from "react";
+import { FC, useState } from "react";
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
+import UserCard from "../../components/usercard/UserCard";
 
 const HomePage: FC = () => {
     const state = userStore();
 
-    useEffect(() => {
-        state.fetchUserDataBySteamId("76561198299236101");
-    }, []);
+    const [input, setInput] = useState<string>("");
 
-    console.log(state.userData);
+    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
+    const handleSearch = () => {
+        state.fetchUserDataBySteamId(input);
+    };
 
     return (
         <div className={styles.home}>
@@ -17,13 +22,21 @@ const HomePage: FC = () => {
             <p className={styles.subtitle}>
                 Instantly retrieve CS2 Faceit players stats from a simple query.
             </p>
-            <form className={styles.search}>
+            <form className={styles.search} onSubmit={handleSubmitForm}>
                 <input
                     className={styles.input}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
                     type="text"
                     placeholder="Steam URL/Steam ID/Faceit nickname"
                 />
+                <button onClick={handleSearch}>Search</button>
             </form>
+            <div className={styles.info}>
+                {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
+                {state.error.length > 0 && <p>User not found</p>}
+                {state.loading && <p>Loading...</p>}
+            </div>
         </div>
     );
 };

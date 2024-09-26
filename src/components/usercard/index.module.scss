@@ -1,0 +1,83 @@
+.card {
+    max-width: 800px;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    padding: 15px;
+
+    .main_info {
+        display: flex;
+        gap: 10px;
+
+        img {
+            border-radius: 10px;
+            max-width: 120px;
+        }
+
+        .text_info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            .row {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .nickname {
+                    font-weight: 700;
+                    font-size: 24px;
+                }
+
+                .level {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    padding: 3px;
+                    border-radius: 50%;
+                    background-color: orange;
+                }
+
+                .data {
+                    padding: 3px;
+                    border-radius: 5px;
+                    border: 1px solid lightgrey;
+
+                    span {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+
+    .links {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border-radius: 5px;
+            padding: 5px;
+            border: 1px solid lightgray;
+            text-decoration: none;
+            color: #000;
+            transition: 0.2s all ease-in-out;
+
+            &:hover {
+                scale: 0.95;
+                background-color: darken(#fff, 4%);
+            }
+
+            svg {
+                max-width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
