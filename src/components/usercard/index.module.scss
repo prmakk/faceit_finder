@@ -1,5 +1,5 @@
 .card {
-    max-width: 800px;
+    max-width: 400px;
     width: 100%;
     border: 1px solid lightgrey;
     border-radius: 15px;
@@ -12,6 +12,7 @@
         img {
             border-radius: 10px;
             max-width: 120px;
+            height: 120px;
         }
 
         .text_info {
@@ -29,14 +30,61 @@
                 }
 
                 .level {
+                    @mixin green {
+                        $color: #20e306;
+                        background-color: #1f1f21;
+                        color: $color;
+                        border: 4px solid $color;
+                    }
+                    @mixin yellow {
+                        $color: #ffca00;
+                        background-color: #1f1f21;
+                        color: $color;
+                        border: 4px solid $color;
+                    }
+                    @mixin orange {
+                        $color: #fc620b;
+                        background-color: #1f1f21;
+                        color: $color;
+                        border: 4px solid $color;
+                    }
+                    @mixin red {
+                        $color: #df1b02;
+                        background-color: #1f1f21;
+                        color: $color;
+                        border: 4px solid $color;
+                    }
                     display: flex;
+                    font-weight: 700;
+                    font-size: 16px;
                     align-items: center;
                     justify-content: center;
-                    width: 30px;
-                    height: 30px;
-                    padding: 3px;
+                    width: 25px;
+                    height: 25px;
                     border-radius: 50%;
                     background-color: orange;
+
+                    &-1,
+                    &-2,
+                    &-3 {
+                        @include green();
+                    }
+
+                    &-4,
+                    &-5,
+                    &-6,
+                    &-7 {
+                        @include yellow();
+                    }
+
+                    &-8,
+                    &-9 {
+                        @include orange();
+                    }
+
+                    &-10 {
+                        @include red();
+                    }
                 }
 
                 .data {
@@ -46,6 +94,20 @@
 
                     span {
                         font-weight: 700;
+                    }
+
+                    .recentMatches {
+                        display: flex;
+                        gap: 3px;
+                        font-weight: 700;
+
+                        .lose {
+                            color: gray;
+                        }
+
+                        .win {
+                            color: rgb(0, 184, 0);
+                        }
                     }
                 }
             }

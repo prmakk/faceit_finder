@@ -41,7 +41,7 @@ export const userStore = create<IStore>((set) => ({
             );
 
             const userGameInfo = await axios.get(
-                `https://open.faceit.com/data/v4/players/${userMainInfo.data.player_id}/stats/csgo`,
+                `https://open.faceit.com/data/v4/players/${userMainInfo.data.player_id}/stats/cs2`,
                 {
                     headers: {
                         Authorization: `Bearer ${

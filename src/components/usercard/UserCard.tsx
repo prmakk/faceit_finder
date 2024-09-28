@@ -2,6 +2,7 @@ import { FC } from "react";
 
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
+import user_no_avatar from "../../assets/user_no_avatar.svg";
 
 const UserCard: FC = () => {
     const state = userStore();
@@ -9,13 +10,26 @@ const UserCard: FC = () => {
     return (
         <div className={styles.card}>
             <div className={styles.main_info}>
-                <img src={state.userMainInfo.avatar} alt="avatar" />
+                <img
+                    src={
+                        state.userMainInfo.avatar
+                            ? state.userMainInfo.avatar
+                            : user_no_avatar
+                    }
+                    alt="avatar"
+                />
                 <div className={styles.text_info}>
                     <div className={styles.row}>
                         <p className={styles.nickname}>
                             {state.userMainInfo.nickname}
                         </p>
-                        <div className={styles.level}>
+                        <div
+                            className={`${styles.level} ${
+                                styles[
+                                    `level-${state.userMainInfo.games.cs2.skill_level}`
+                                ]
+                            }`}
+                        >
                             {state.userMainInfo.games.cs2.skill_level}
                         </div>
                     </div>
@@ -37,6 +51,16 @@ const UserCard: FC = () => {
                             </span>{" "}
                             K/D
                         </div>
+                        <div className={styles.data}>
+                            <span>
+                                {
+                                    state.userGameInfo.lifetime[
+                                        "Average Headshots %"
+                                    ]
+                                }
+                            </span>{" "}
+                            %HS
+                        </div>
                     </div>
 
                     <div className={styles.row}>
@@ -51,6 +75,26 @@ const UserCard: FC = () => {
                             <span>
                                 {state.userGameInfo.lifetime["Win Rate %"]}%
                             </span>
+                        </div>
+                    </div>
+
+                    <div className={styles.row}>
+                        <div className={styles.data}>
+                            <ul className={styles.recentMatches}>
+                                {state.userGameInfo.lifetime[
+                                    "Recent Results"
+                                ].map((game: string) => (
+                                    <li
+                                        className={
+                                            game === "0"
+                                                ? styles.lose
+                                                : styles.win
+                                        }
+                                    >
+                                        {game === "0" ? "L" : "W"}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
