@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
 import UserCard from "../../components/usercard/UserCard";
+import Loader from "../../components/loader/Loader";
 
 const HomePage: FC = () => {
     const state = userStore();
@@ -40,7 +41,7 @@ const HomePage: FC = () => {
             <div className={styles.info}>
                 {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
                 {state.error.length > 0 && <p>{state.error}</p>}
-                {state.loading && <p>Loading...</p>}
+                {state.loading && <Loader />}
             </div>
         </div>
     );
