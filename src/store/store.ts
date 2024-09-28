@@ -8,6 +8,7 @@ interface IStore {
     userFaceitId: string;
     loading: boolean;
     error: string;
+    setError: (error: string) => void;
     fetchUserDataBySteamId: (id: string) => Promise<void>;
 }
 
@@ -18,6 +19,9 @@ export const userStore = create<IStore>((set) => ({
     userSteamId: 0,
     userFaceitId: "",
     error: "",
+    setError: (error) => {
+        set({ error: error });
+    },
     fetchUserDataBySteamId: async (id) => {
         set({ userMainInfo: [], loading: true, error: "" });
         try {
@@ -60,7 +64,10 @@ export const userStore = create<IStore>((set) => ({
             });
         } catch (error) {
             console.error("Request error:", error);
-            set({ error: String(error), loading: false });
+            set({
+                error: "User not found",
+                loading: false,
+            });
         }
     },
 }));

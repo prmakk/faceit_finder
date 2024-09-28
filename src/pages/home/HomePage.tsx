@@ -13,7 +13,12 @@ const HomePage: FC = () => {
     };
 
     const handleSearch = () => {
-        state.fetchUserDataBySteamId(input);
+        if (input.trim() === "") {
+            state.setError("Input empty");
+        } else {
+            console.log("fetch sent");
+            state.fetchUserDataBySteamId(input);
+        }
     };
 
     return (
@@ -34,7 +39,7 @@ const HomePage: FC = () => {
             </form>
             <div className={styles.info}>
                 {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
-                {state.error.length > 0 && <p>User not found</p>}
+                {state.error.length > 0 && <p>{state.error}</p>}
                 {state.loading && <p>Loading...</p>}
             </div>
         </div>
