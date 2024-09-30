@@ -83,8 +83,9 @@ const UserCard: FC = () => {
                             <ul className={styles.recentMatches}>
                                 {state.userGameInfo.lifetime[
                                     "Recent Results"
-                                ].map((game: string) => (
+                                ].map((game: string, index: number) => (
                                     <li
+                                        key={index}
                                         className={
                                             game === "0"
                                                 ? styles.lose
