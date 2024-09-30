@@ -2,7 +2,7 @@
 @import "../../styles/mixins.scss";
 
 .home {
-    height: calc(100vh - 70px);
+    height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
 
@@ -71,5 +71,11 @@
         margin-top: 40px;
         display: flex;
         justify-content: center;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .home .title {
+        padding-top: 100px;
     }
 }

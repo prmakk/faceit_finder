@@ -7,11 +7,9 @@
 .container {
     max-width: 1700px;
     margin: 0 auto;
-    overflow-x: hidden;
-    width: 100%;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1700px) {
     .container {
         padding: 0px 10px;
     }
