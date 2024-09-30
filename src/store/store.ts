@@ -20,7 +20,7 @@ export const userStore = create<IStore>((set) => ({
     userFaceitId: "",
     error: "",
     setError: (error) => {
-        set({ error: error });
+        set({ userMainInfo: [], error: error });
     },
     fetchUserDataBySteamId: async (id) => {
         set({ userMainInfo: [], loading: true, error: "" });
