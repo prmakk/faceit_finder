@@ -14,11 +14,26 @@ const HomePage: FC = () => {
     };
 
     const handleSearch = () => {
-        if (input.trim() === "") {
-            state.setError("Input empty");
-        } else {
+        const trimmedInput = input.trim();
+        const isUrl = /https?:\/\/(?:www\.)?[\w.-]+\/([\w-]+)/.test(
+            trimmedInput
+        );
+        const isId = /^[a-zA-Z0-9-]+$/.test(trimmedInput);
+
+        if (trimmedInput === "") {
+            state.setError("Input is empty");
+        } else if (isUrl) {
             console.log("fetch sent");
+            const parts = trimmedInput.split("/");
+            const steamId =
+                parts[parts.length - 1] === ""
+                    ? parts[parts.length - 2]
+                    : parts[parts.length - 1];
+            state.fetchUserDataBySteamId(steamId);
+        } else if (isId) {
             state.fetchUserDataBySteamId(input);
+        } else {
+            //TODO: SEARCH BY NICKNAME ON FACEIT
         }
     };
 
