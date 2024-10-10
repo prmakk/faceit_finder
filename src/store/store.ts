@@ -10,6 +10,7 @@ interface IStore {
     error: string;
     setError: (error: string) => void;
     fetchUserDataBySteamId: (id: string) => Promise<void>;
+    fetchUserDataByFaceitNickname: (nickname: string) => Promise<void>;
 }
 
 export const userStore = create<IStore>((set) => ({
@@ -60,6 +61,50 @@ export const userStore = create<IStore>((set) => ({
                 userGameInfo: userGameInfo.data,
                 loading: false,
                 userSteamId: steam64id,
+                userFaceitId: String(userMainInfo.data.player_id),
+            });
+        } catch (error: any) {
+            if (error.status >= 400) {
+                //if we didn't find by steam URL/ID we'll try to find by faceit nickname
+                await userStore.getState().fetchUserDataByFaceitNickname(id);
+            } else {
+                console.error("Request error:", error);
+                set({
+                    error: "User not found",
+                    loading: false,
+                });
+            }
+        }
+    },
+    fetchUserDataByFaceitNickname: async (nickname: string) => {
+        set({ userMainInfo: [], loading: true, error: "" });
+        try {
+            const userMainInfo = await axios.get(
+                `https://open.faceit.com/data/v4/players?nickname=${nickname}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${
+                            import.meta.env.VITE_FACEIT_API_TOKEN
+                        }`,
+                    },
+                }
+            );
+
+            const userGameInfo = await axios.get(
+                `https://open.faceit.com/data/v4/players/${userMainInfo.data.player_id}/stats/cs2`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${
+                            import.meta.env.VITE_FACEIT_API_TOKEN
+                        }`,
+                    },
+                }
+            );
+
+            set({
+                userMainInfo: userMainInfo.data,
+                userGameInfo: userGameInfo.data,
+                loading: false,
                 userFaceitId: String(userMainInfo.data.player_id),
             });
         } catch (error) {

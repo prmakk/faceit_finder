@@ -33,8 +33,6 @@ const HomePage: FC = () => {
             state.fetchUserDataBySteamId(steamId);
         } else if (isId) {
             state.fetchUserDataBySteamId(input);
-        } else {
-            //TODO: SEARCH BY NICKNAME ON FACEIT
         }
     };
 
