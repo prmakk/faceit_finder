@@ -10,7 +10,7 @@ bot.command("start", async (ctx) => {
                 [
                     {
                         text: "Start 🚀",
-                        web_app: { url: "https://prmak.netlify.app" },
+                        web_app: { url: "https://faceit-finder.netlify.app" },
                     },
                 ],
             ],
