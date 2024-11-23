@@ -1,0 +1,13 @@
+{
+    "name": "faceit-finder-bot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "grammy": "^1.32.0"
+    }
+}
