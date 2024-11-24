@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
 import UserCard from "../../components/usercard/UserCard";
-import Error from "../../components/error/Error";
 import Loader from "../../components/loader/Loader";
+import toast from "react-hot-toast";
 
 const HomePage: FC = () => {
     const state = userStore();
@@ -21,8 +21,8 @@ const HomePage: FC = () => {
         );
         const isId = /^[a-zA-Z0-9-]+$/.test(trimmedInput);
 
-        if (trimmedInput === "") {
-            state.setError("Input is empty");
+        if (trimmedInput.length === 0) {
+            toast.error("Input is empty");
         } else if (isUrl) {
             console.log("fetch sent");
             const parts = trimmedInput.split("/");
@@ -54,7 +54,6 @@ const HomePage: FC = () => {
             </form>
             <div className={styles.info}>
                 {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
-                {state.error.length > 0 && <Error>{state.error}</Error>}
                 {state.loading && <Loader />}
             </div>
         </div>

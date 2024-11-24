@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { create } from "zustand";
 
 interface IStore {
@@ -7,8 +8,6 @@ interface IStore {
     userSteamId: number;
     userFaceitId: string;
     loading: boolean;
-    error: string;
-    setError: (error: string) => void;
     fetchUserDataBySteamId: (id: string) => Promise<void>;
     fetchUserDataByFaceitNickname: (nickname: string) => Promise<void>;
 }
@@ -19,12 +18,8 @@ export const userStore = create<IStore>((set) => ({
     loading: false,
     userSteamId: 0,
     userFaceitId: "",
-    error: "",
-    setError: (error) => {
-        set({ userMainInfo: [], error: error });
-    },
     fetchUserDataBySteamId: async (id) => {
-        set({ userMainInfo: [], loading: true, error: "" });
+        set({ userMainInfo: [], loading: true });
         try {
             const response = await axios.get(
                 `https://playerdb.co/api/player/steam/${id}`
@@ -63,6 +58,8 @@ export const userStore = create<IStore>((set) => ({
                 userSteamId: steam64id,
                 userFaceitId: String(userMainInfo.data.player_id),
             });
+
+            toast.success("Player found");
         } catch (error: any) {
             if (error.status >= 400) {
                 //if we didn't find by steam URL/ID we'll try to find by faceit nickname
@@ -70,14 +67,14 @@ export const userStore = create<IStore>((set) => ({
             } else {
                 console.error("Request error:", error);
                 set({
-                    error: "User not found",
                     loading: false,
                 });
+                toast.error("Player not found");
             }
         }
     },
     fetchUserDataByFaceitNickname: async (nickname: string) => {
-        set({ userMainInfo: [], loading: true, error: "" });
+        set({ userMainInfo: [], loading: true });
         try {
             const userMainInfo = await axios.get(
                 `https://open.faceit.com/data/v4/players?nickname=${nickname}`,
@@ -107,12 +104,14 @@ export const userStore = create<IStore>((set) => ({
                 loading: false,
                 userFaceitId: String(userMainInfo.data.player_id),
             });
+
+            toast.success("Player found");
         } catch (error) {
             console.error("Request error:", error);
             set({
-                error: "User not found",
                 loading: false,
             });
+            toast.error("Player not found");
         }
     },
 }));
