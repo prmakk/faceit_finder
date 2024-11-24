@@ -1,7 +1,13 @@
 import "dotenv/config";
 import { Bot, GrammyError, HttpError } from "grammy";
+import express from "express";
 
 const bot = new Bot(process.env.BOT_API_TOKEN);
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Server is working, bot has started.");
+});
 
 bot.command("start", async (ctx) => {
     await ctx.reply("Click the button below to open the Web App!", {
@@ -34,3 +40,4 @@ bot.catch((error) => {
 });
 
 bot.start();
+app.listen(3000, () => console.log("Server is working..."));
