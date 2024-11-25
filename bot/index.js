@@ -4,12 +4,12 @@ import { Bot, GrammyError, HttpError } from "grammy";
 const bot = new Bot(process.env.BOT_API_TOKEN);
 
 bot.command("start", async (ctx) => {
-    await ctx.reply("Click the button below to open the Web App!", {
+    await ctx.reply("Нажми на кнопку ниже, чтобы открыть приложение 👇", {
         reply_markup: {
             inline_keyboard: [
                 [
                     {
-                        text: "Start 🚀",
+                        text: "Найти FACEIT аккаунт 🕵️",
                         web_app: { url: "https://faceit-finder.netlify.app" },
                     },
                 ],
