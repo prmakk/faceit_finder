@@ -1,23 +1,34 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
 import user_no_avatar from "../../assets/user_no_avatar.svg";
+import Skeleton from "../skeleton/Skeleton";
 
 const UserCard: FC = () => {
     const state = userStore();
 
+    const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+
     return (
         <div className={styles.card}>
             <div className={styles.main_info}>
+                {isImageLoading && (
+                    <Skeleton width="120" ratio="1/1" borderRadius="10" />
+                )}
                 <img
                     src={
                         state.userMainInfo.avatar
                             ? state.userMainInfo.avatar
                             : user_no_avatar
                     }
+                    style={{
+                        display: isImageLoading ? "none" : "block",
+                    }}
                     alt="avatar"
+                    onLoad={() => setIsImageLoading(false)}
                 />
+
                 <div className={styles.text_info}>
                     <div className={styles.row}>
                         <p className={styles.nickname}>
