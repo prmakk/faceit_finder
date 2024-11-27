@@ -24,7 +24,6 @@ const HomePage: FC = () => {
         if (trimmedInput.length === 0) {
             toast.error("Input is empty");
         } else if (isUrl) {
-            console.log("fetch sent");
             const parts = trimmedInput.split("/");
             const steamId =
                 parts[parts.length - 1] === ""

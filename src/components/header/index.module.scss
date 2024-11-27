@@ -12,20 +12,26 @@
         font-size: 46px;
         text-transform: uppercase;
         font-weight: 700;
+        text-decoration: none;
     }
 
-    svg {
+    .button {
+        text-decoration: none;
+        color: #fff;
+        background-color: #459aee;
+        padding: 7px 15px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        outline: none;
+        transition: 0.1s all ease-in;
+
         &:hover {
-            animation: spin 0.4s;
-        }
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
+            background-color: darken(#459aee, 5%);
+            transform: rotate(-2deg);
         }
     }
 }
