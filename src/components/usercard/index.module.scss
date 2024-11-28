@@ -4,6 +4,8 @@
     border: 1px solid lightgrey;
     border-radius: 15px;
     padding: 15px;
+    color: var(--text-color);
+    margin-bottom: 40px;
 
     .main_info {
         display: flex;
@@ -19,6 +21,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+
             .row {
                 display: flex;
                 align-items: center;
@@ -121,6 +124,7 @@
         gap: 10px;
 
         a {
+            color: var(--text-color);
             display: flex;
             align-items: center;
             gap: 5px;
@@ -128,7 +132,6 @@
             padding: 5px;
             border: 1px solid lightgray;
             text-decoration: none;
-            color: #000;
             transition: 0.2s all ease-in-out;
 
             &:hover {
@@ -139,6 +142,7 @@
             svg {
                 max-width: 20px;
                 height: 20px;
+                fill: var(--text-color);
             }
         }
     }

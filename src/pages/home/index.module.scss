@@ -2,6 +2,7 @@
 @import "../../styles/mixins.scss";
 
 .home {
+    position: relative;
     height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
@@ -18,6 +19,7 @@
         margin-top: 10px;
         text-align: center;
         font-size: clamp(14px, 2vw, 18px);
+        color: var(--text-color);
     }
 
     .search {

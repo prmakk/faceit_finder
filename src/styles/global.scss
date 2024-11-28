@@ -1,11 +1,21 @@
+@import "./variables.scss";
+@import "./mixins.scss";
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+    @include apply-theme($light-theme);
+}
+
+[data-theme="dark"] {
+    @include apply-theme($dark-theme);
+}
 
 * {
     font-family: "PT Sans", sans-serif;
 }
 
 body {
-    background-color: #fff;
+    background-color: var(--background-color);
     box-sizing: border-box;
 }
 

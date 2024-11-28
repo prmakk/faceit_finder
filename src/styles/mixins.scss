@@ -16,3 +16,9 @@
         #db5adf 100%
     );
 }
+
+@mixin apply-theme($theme) {
+    @each $property, $value in $theme {
+        --#{$property}: #{$value};
+    }
+}

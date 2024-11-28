@@ -1,8 +1,11 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { create } from "zustand";
+import Theme from "../types/types";
 
 interface IStore {
+    theme: Theme;
+    changeTheme: (them: Theme) => void;
     userMainInfo: any;
     userGameInfo: any;
     userSteamId: number;
@@ -13,6 +16,10 @@ interface IStore {
 }
 
 export const userStore = create<IStore>((set) => ({
+    theme: "light",
+    changeTheme: (prev: Theme) => {
+        set({ theme: prev === "light" ? "dark" : "light" });
+    },
     userMainInfo: [],
     userGameInfo: [],
     loading: false,
@@ -26,8 +33,6 @@ export const userStore = create<IStore>((set) => ({
             );
 
             const { steam64id } = response.data.data.player.meta;
-
-            console.log("Steam64 ID:", steam64id);
 
             const userMainInfo = await axios.get(
                 `https://open.faceit.com/data/v4/players?game=csgo&game_player_id=${steam64id}`,

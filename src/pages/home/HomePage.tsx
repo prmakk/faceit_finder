@@ -4,6 +4,7 @@ import { userStore } from "../../store/store";
 import UserCard from "../../components/usercard/UserCard";
 import Loader from "../../components/loader/Loader";
 import toast from "react-hot-toast";
+import ThemeSwitcher from "../../components/theme_switcher/ThemeSwitcher";
 
 const HomePage: FC = () => {
     const state = userStore();
@@ -55,6 +56,8 @@ const HomePage: FC = () => {
                 {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
                 {state.loading && <Loader />}
             </div>
+
+            <ThemeSwitcher />
         </div>
     );
 };
