@@ -15,23 +15,51 @@
         text-decoration: none;
     }
 
-    .button {
-        text-decoration: none;
-        color: #fff;
-        background-color: #459aee;
-        padding: 7px 15px;
-        border-radius: 10px;
+    .nav {
         display: flex;
         align-items: center;
-        gap: 5px;
-        font-size: 14px;
-        font-weight: 500;
-        outline: none;
-        transition: 0.1s all ease-in;
+        gap: 10px;
 
-        &:hover {
-            background-color: darken(#459aee, 5%);
-            transform: rotate(-2deg);
+        .dropdown {
+            @include backgroundGradient();
+            border: none;
+            outline: none;
+            color: #fff;
+            padding: 7px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            min-height: 34px;
+            cursor: pointer;
+
+            //remove default arrow from select tag
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-overflow: "";
+
+            option {
+                background-color: var(--background-color);
+                color: var(--text-color);
+            }
+        }
+
+        .button {
+            text-decoration: none;
+            color: #fff;
+            background-color: #459aee;
+            padding: 7px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+            transition: 0.1s all ease-in;
+
+            &:hover {
+                background-color: darken(#459aee, 5%);
+                transform: rotate(-2deg);
+            }
         }
     }
 }

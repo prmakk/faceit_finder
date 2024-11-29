@@ -2,6 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 import Theme from "../types/types";
+import i18next from "i18next";
 
 interface IStore {
     theme: Theme;
@@ -64,7 +65,7 @@ export const userStore = create<IStore>((set) => ({
                 userFaceitId: String(userMainInfo.data.player_id),
             });
 
-            toast.success("Player found");
+            toast.success(i18next.t("player-found"));
         } catch (error: any) {
             if (error.status >= 400) {
                 //if we didn't find by steam URL/ID we'll try to find by faceit nickname
@@ -74,7 +75,7 @@ export const userStore = create<IStore>((set) => ({
                 set({
                     loading: false,
                 });
-                toast.error("Player not found");
+                toast.error(i18next.t("player-not-found"));
             }
         }
     },
@@ -110,13 +111,13 @@ export const userStore = create<IStore>((set) => ({
                 userFaceitId: String(userMainInfo.data.player_id),
             });
 
-            toast.success("Player found");
+            toast.success(i18next.t("player-found"));
         } catch (error) {
             console.error("Request error:", error);
             set({
                 loading: false,
             });
-            toast.error("Player not found");
+            toast.error(i18next.t("player-not-found"));
         }
     },
 }));

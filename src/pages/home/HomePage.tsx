@@ -1,13 +1,16 @@
 import { FC, useState } from "react";
+import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+
 import styles from "./index.module.scss";
 import { userStore } from "../../store/store";
 import UserCard from "../../components/usercard/UserCard";
 import Loader from "../../components/loader/Loader";
-import toast from "react-hot-toast";
 import ThemeSwitcher from "../../components/theme_switcher/ThemeSwitcher";
 
 const HomePage: FC = () => {
     const state = userStore();
+    const { t } = useTranslation();
 
     const [input, setInput] = useState<string>("");
 
@@ -39,9 +42,7 @@ const HomePage: FC = () => {
     return (
         <div className={styles.home}>
             <h1 className={styles.title}>FaceitFinder</h1>
-            <p className={styles.subtitle}>
-                Instantly retrieve CS2 Faceit players stats from a simple query.
-            </p>
+            <p className={styles.subtitle}>{t("subtitle")}</p>
             <form className={styles.search} onSubmit={handleSubmitForm}>
                 <input
                     className={styles.input}
@@ -50,7 +51,7 @@ const HomePage: FC = () => {
                     type="text"
                     placeholder="Steam URL/Steam ID/Faceit nickname"
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button onClick={handleSearch}>{t("search")}</button>
             </form>
             <div className={styles.info}>
                 {state.userMainInfo.hasOwnProperty("avatar") && <UserCard />}
